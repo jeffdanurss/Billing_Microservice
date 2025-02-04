@@ -1,0 +1,25 @@
+# Ignorar binarios
+/bin/
+/build/
+
+# Ignorar archivos temporales de Go
+*.log
+*.tmp
+*.swp
+
+# Ignorar el directorio de módulos de Go
+/vendor/
+
+# Ignorar el directorio de dependencias de Go (mod y sum)
+/go.mod
+/go.sum
+
+# Archivos de configuración del editor
+.idea/
+.vscode/
+
+# Archivos de configuración de la terminal
+.env
+
+# Otros archivos de configuración y sensibles
+.DS_Store
