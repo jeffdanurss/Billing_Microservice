@@ -8,7 +8,7 @@ import (
 )
 
 func SendWebhookNotification(factura models.Factura) error {
-    webhookURL := "http://localhost:5001/webhook" // URL del microservicio de notificaciones
+    webhookURL := "http://localhost:5001/webhook" // URL microservices
     jsonData, err := json.Marshal(factura)
     if err != nil {
         return err

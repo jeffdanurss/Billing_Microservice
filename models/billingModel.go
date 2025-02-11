@@ -1,12 +1,25 @@
 package models
 
-import (
-    "gorm.io/gorm"
-)
+import "gorm.io/gorm"
 
-type Factura struct {
+//Payment model
+type Payment struct {
+    OrderID string   `json:"orderId"`
+    Amount float64 `json:"amount"`
+    Date   string `json:"date,omitempty`
+    Email  string  `json:"email"`
+    Currency string `json:"currency"`
+}
+
+// Invoice model
+type Invoice struct {
     gorm.Model
-    OrdenID uint   `json:"orden_id"`
-    Total   float64 `json:"total"`
-    Fecha   string  `json:"fecha"`
+    OrderID string    `json:"order_id"`
+    Amount float64 `json:"amount"`
+    Total float64 `json:"amount"`
+    Date    string  `json:"date"`
+    Email   string  `json:"email"` // Added email field
+    Currency   string `json:"currency"`
+    
+    
 }
