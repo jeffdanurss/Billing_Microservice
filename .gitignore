@@ -21,7 +21,7 @@ invoices/
 .vscode/
 
 # temrinal setting files 
-.env
+#.env
 
 # another settings files 
 .DS_Store
