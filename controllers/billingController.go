@@ -20,6 +20,13 @@ func ReceivePayment(c *gin.Context) {
 
     // Aquí puedes procesar el pago (por ejemplo, guardar en la base de datos, enviar notificaciones, etc.)
     // Por ahora, simplemente devolvemos una respuesta exitosa
+	// Guardar el pago en la base de datos
+    result := config.DB.Create(&payment)
+    if result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+        return
+    }
+
     c.JSON(http.StatusOK, gin.H{"message": "Payment received successfully", "payment": payment})
 }
 // Create a new billing
