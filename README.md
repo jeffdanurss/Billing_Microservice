@@ -1,12 +1,15 @@
+
 ---
 
-# Notification Microservice
+### **Billing Microservice**
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/your-username/notification_microservice/ci.yml?branch=main) ![Docker Image Size](https://img.shields.io/docker/image-size/jeffdanurss/notification_microservice/latest) ![License](https://img.shields.io/github/license/your-username/notification_microservice)
+# Billing Microservice
 
-> A microservice for managing notifications via email and RabbitMQ.
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/your-username/billing_microservice/ci.yml?branch=main) ![Docker Image Size](https://img.shields.io/docker/image-size/jeffdanurss/billing_microservice/latest) ![License](https://img.shields.io/github/license/your-username/billing_microservice)
 
-This microservice is designed to handle notifications by consuming messages from a RabbitMQ queue, processing them, and sending emails using MongoDB as the database.
+> A microservice for managing billing operations such as invoice generation and transaction tracking.
+
+This microservice is responsible for creating invoices, storing billing data in MongoDB, and publishing billing events to RabbitMQ for downstream processing.
 
 ---
 
@@ -26,11 +29,10 @@ This microservice is designed to handle notifications by consuming messages from
 
 ## Features
 
-- **RabbitMQ Integration**: Consumes messages from a RabbitMQ queue.
-- **Email Notifications**: Sends emails using an SMTP server.
-- **MongoDB Storage**: Persists notification data in a MongoDB database.
-- **REST API**: Provides endpoints to interact with the service.
-- **Docker Support**: Easily deployable using Docker and Docker Compose.
+- **Invoice Generation**: Creates invoices based on user transactions.
+- **MongoDB Storage**: Persists billing data in a MongoDB database.
+- **RabbitMQ Integration**: Publishes billing events to RabbitMQ for downstream processing.
+- **REST API**: Provides endpoints to interact with the billing service.
 
 ---
 
@@ -49,8 +51,8 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/notification_microservice.git
-   cd notification_microservice
+   git clone https://github.com/your-username/billing_microservice.git
+   cd billing_microservice
    ```
 
 2. Install dependencies:
@@ -65,18 +67,14 @@ Before you begin, ensure you have the following installed:
 Create a `.env` file in the root directory and add the following environment variables:
 
 ```env
-PORT=3002
-MONGO_URI=mongodb://root:example@mongodb:27017/notifications?authSource=admin
+PORT=3001
+MONGO_URI=mongodb://root:example@mongodb:27017/billing?authSource=admin
 RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-email-password
 ```
 
 - `PORT`: The port on which the service will run.
 - `MONGO_URI`: Connection string for MongoDB.
 - `RABBITMQ_URI`: Connection string for RabbitMQ.
-- `EMAIL_USER`: Email address for sending notifications.
-- `EMAIL_PASS`: Password for the email account.
 
 ---
 
@@ -90,27 +88,29 @@ EMAIL_PASS=your-email-password
    npm start
    ```
 
-The service will start listening on the specified port (default: `3002`).
+The service will start listening on the specified port (default: `3001`).
 
 ---
 
 ## API Endpoints
 
-### Send a Notification
+### Generate an Invoice
 
-- **POST** `/notifications`
+- **POST** `/invoices`
   - **Request Body**:
     ```json
     {
-      "message": "Hello, this is a test notification!",
-      "email": "recipient@example.com"
+      "userId": "12345",
+      "amount": 100,
+      "description": "Monthly subscription"
     }
     ```
   - **Response**:
     ```json
     {
       "status": "success",
-      "message": "Notification sent successfully."
+      "message": "Invoice generated successfully.",
+      "invoiceId": "64a1b2c3d4e5f6g7h8i9j0k1"
     }
     ```
 
@@ -125,18 +125,18 @@ The service will start listening on the specified port (default: `3002`).
    docker-compose up --build
    ```
 
-2. Access the service at `http://localhost:3002`.
+2. Access the service at `http://localhost:3001`.
 
 ### Push Docker Image to Docker Hub
 
 1. Build the Docker image:
    ```bash
-   docker build -t jeffdanurss/notification_microservice:latest .
+   docker build -t jeffdanurss/billing_microservice:latest .
    ```
 
 2. Push the image to Docker Hub:
    ```bash
-   docker push jeffdanurss/notification_microservice:latest
+   docker push jeffdanurss/billing_microservice:latest
    ```
 
 ---
@@ -158,15 +158,5 @@ Please follow the [code of conduct](CODE_OF_CONDUCT.md).
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgments
-
-- [Node.js](https://nodejs.org/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [RabbitMQ](https://www.rabbitmq.com/)
-- [Nodemailer](https://nodemailer.com/)
 
 ---
