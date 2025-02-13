@@ -19,7 +19,7 @@
 .vscode/
 
 # Archivos de configuración de la terminal
-.env
+
 
 # Otros archivos de configuración y sensibles
 .DS_Store

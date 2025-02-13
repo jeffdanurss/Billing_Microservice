@@ -25,6 +25,7 @@ services:
       DB_PORT: 5432
     depends_on:
       - db
-
+    volumes:
+      - C:/Users/HP VICTUS/Documents/GitHub/Billing_Microservice/.env:/app/.env  # Agrega esta línea
 volumes:
   postgres_data:

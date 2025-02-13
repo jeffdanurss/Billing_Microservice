@@ -19,6 +19,8 @@ FROM alpine:latest
 # Copiar el binario compilado
 WORKDIR /root/
 COPY --from=builder /app/billing-microservice .
+# Copia el archivo .env (si es necesario)
+COPY .env .
 
 # Exponer el puerto 8080
 EXPOSE 8080
