@@ -11,8 +11,7 @@
 /vendor/
 
 # Ignorar el directorio de dependencias de Go (mod y sum)
-/go.mod
-/go.sum
+
 
 # Archivos de configuración del editor
 .idea/
